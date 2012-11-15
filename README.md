@@ -1,7 +1,45 @@
 simple_show_helper
 =======
 
-Coming soon...
+Why?
+-----
+
+It is intended to use with new Rails+Bootstrap apps to create as fast as possible 'show' pages.
+You only have to add one line to view which will describe model instance + it references.
+
+I use this tool here https://github.com/akwiatkowski/waypoint_manager/blob/master/app/views/areas/show.html.haml
+
+How to?
+-----
+
+Add line in view
+
+  = simple_model_details(User.first)
+
+Keep in mind that it uses only locales in format for example: 'en.user.email'
+
+Custom attributes:
+
+  simple_model_details(User.first, attrs: ["email", "name"])
+
+Add created_at, updated_at attributes:
+
+  simple_model_details(User.first, timestamps: true)
+
+Custom table class, for not Bootstrap users:
+
+  simple_model_details(User.first, table_class: "table")
+
+All options example:
+
+ raw simple_model_details(resource, attrs: ["name"], timestamps: true, table_class: "table")
+
+
+Spec, tests, ...
+----------------
+
+... :)
+
 
 Contributing to simple_show_helper
 -------------------------------
