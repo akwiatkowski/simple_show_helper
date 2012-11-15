@@ -1,22 +1,22 @@
 module ApplicationHelper
 # Usage:
 # use in view with bootstrap
-#   = simple_model_details(User.first)
+#   = simple_show_helper(User.first)
 #
 # Keep in mind:
 # * it uses only locales in format like this 'en.user.email'
 #
 # Custom attributes:
-#   = simple_model_details(User.first, attrs: ["email", "name"])
+#   = simple_show_helper(User.first, attrs: ["email", "name"])
 # Add created_at, updated_at:
-#   = simple_model_details(User.first, timestamps: true)
+#   = simple_show_helper(User.first, timestamps: true)
 # Custom table class
-#   = simple_model_details(User.first, table_class: "table")
+#   = simple_show_helper(User.first, table_class: "table")
 #
 # Example:
-#= raw simple_model_details(resource, attrs: ["name"], timestamps: true, table_class: "table")
+#= raw simple_show_helper(resource, attrs: ["name"], timestamps: true, table_class: "table")
 
-  def simple_model_details(m, options = { })
+  def simple_show_helper(m, options = { })
     if options[:table_class]
       table_class = options[:table_class]
     else

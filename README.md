@@ -1,4 +1,4 @@
-simple_show_helper
+simple\_show\_helper
 =======
 
 Why?
@@ -7,32 +7,32 @@ Why?
 It is intended to use with new Rails+Bootstrap apps to create as fast as possible 'show' pages.
 You only have to add one line to view which will describe model instance + it references.
 
-I use this tool here https://github.com/akwiatkowski/waypoint_manager/blob/master/app/views/areas/show.html.haml
+I use this tool here [https://github.com/akwiatkowski/waypoint_manager/blob/master/app/views/areas/show.html.haml](https://github.com/akwiatkowski/waypoint_manager/blob/master/app/views/areas/show.html.haml)
 
 How to?
 -----
 
 Add line in view
 
-  = simple_model_details(User.first)
+>  = raw simple_show_helper(User.first)
 
 Keep in mind that it uses only locales in format for example: 'en.user.email'
 
 Custom attributes:
 
-  simple_model_details(User.first, attrs: ["email", "name"])
+>  = raw simple_show_helper(User.first, attrs: ["email", "name"])
 
 Add created_at, updated_at attributes:
 
-  simple_model_details(User.first, timestamps: true)
+>  = raw simple_show_helper(User.first, timestamps: true)
 
 Custom table class, for not Bootstrap users:
 
-  simple_model_details(User.first, table_class: "table")
+>  = raw simple_show_helper(User.first, table_class: "table")
 
 All options example:
 
- raw simple_model_details(resource, attrs: ["name"], timestamps: true, table_class: "table")
+>  = raw simple_show_helper(resource, attrs: ["name"], timestamps: true, table_class: "table")
 
 
 Spec, tests, ...
