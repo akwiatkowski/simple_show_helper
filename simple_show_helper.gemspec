@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "simple_show_helper"
-  s.version = "0.0.1"
+  s.version = "0.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Aleksander Kwiatkowski"]
-  s.date = "2012-11-15"
+  s.date = "2012-11-16"
   s.description = "Simple helper to create 'show' pages easily."
   s.email = "bobikx@poczta.fm"
   s.extra_rdoc_files = [
