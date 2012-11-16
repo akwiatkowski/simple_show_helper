@@ -54,7 +54,7 @@ module ApplicationHelper
       value = m.attributes[d]
 
       value = case value.class.to_s
-                when "Time" then
+                when "Time", "ActiveSupport::TimeWithZone" then
                   l(value, format: :long)
                 when "TrueClass" then
                   I18n.t(:true)
@@ -65,21 +65,25 @@ module ApplicationHelper
               end
 
       if assoc_keys.include?(d)
-        r = associations[d].where(id: value.to_i).first
-        can_read = can?(:read, r)
-
         # nobody wants id
         value = ""
-        association_desc_keys.each do |ak|
-          if r.attributes[ak]
-            value = r.attributes[ak]
-            break
-          end
-        end
 
-        # if can read, link to it
-        if can_read
-          value = "<a href=\"#{url_for(r)}\">#{value}</a>"
+        r = associations[d].where(id: value.to_i).first
+        if r
+          can_read = can?(:read, r)
+
+
+          association_desc_keys.each do |ak|
+            if r.attributes[ak]
+              value = r.attributes[ak]
+              break
+            end
+          end
+
+          # if can read, link to it
+          if can_read
+            value = "<a href=\"#{url_for(r)}\">#{value}</a>"
+          end
         end
 
       end
