@@ -13,6 +13,8 @@ class SimpleShowHelper
                  d << [k, humanize(o[k])]
                end
                render_table(d, @table_class)
+             when "Array" then
+               render_table(o.collect { |a| [humanize(a)] }, @table_class)
              when NilClass
                '...'
              else
