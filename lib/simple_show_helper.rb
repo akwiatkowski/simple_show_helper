@@ -2,7 +2,7 @@ class SimpleShowHelper
   def humanize(o)
     return case o.class.to_s
              when "Time", "ActiveSupport::TimeWithZone" then
-               l(o, format: :long)
+               I18n.l(o, format: :long)
              when "TrueClass" then
                I18n.t(:true)
              when "FalseClass" then
