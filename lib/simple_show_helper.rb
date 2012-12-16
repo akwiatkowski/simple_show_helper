@@ -1,14 +1,22 @@
 class SimpleShowHelper
   def humanize(o)
-    return case value.class.to_s
+    return case o.class.to_s
              when "Time", "ActiveSupport::TimeWithZone" then
-               l(value, format: :long)
+               l(o, format: :long)
              when "TrueClass" then
                I18n.t(:true)
              when "FalseClass" then
                I18n.t(:no)
+             when "Hash" then
+               d = Array.new
+               o.keys.sort.each do |k|
+                 d << [k, humanize(o[k])]
+               end
+               render_table(d, @table_class)
+             when NilClass
+               '...'
              else
-               value
+               o.to_s
            end
 
   end
@@ -92,11 +100,14 @@ class SimpleShowHelper
     if @options[:timestamps]
       #details << [m.class.human_attribute_name("created_at"), l(m.attributes["created_at"], format: :long)]
       #details << [m.class.human_attribute_name("updated_at"), l(m.attributes["updated_at"], format: :long)]
-      details << [I18n.t("created_at"), l(m.attributes["created_at"], format: :long)]
-      details << [I18n.t("updated_at"), l(m.attributes["updated_at"], format: :long)]
+      details << [I18n.t("created_at"), @object.attributes["created_at"]]
+      details << [I18n.t("updated_at"), @object.attributes["updated_at"]]
     end
 
-    @details = details
+    @details = Array.new
+    details.each do |d|
+      @details << [humanize(d[0]), humanize(d[1])]
+    end
   end
 
   def initialize(_object, _options)
@@ -134,6 +145,5 @@ module ApplicationHelper
   def simple_show_helper(m, options = { })
     return SimpleShowHelper.new(m, options).to_s
   end
-
 
 end
