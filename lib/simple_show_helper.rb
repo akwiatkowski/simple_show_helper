@@ -101,12 +101,20 @@ module ApplicationHelper
       details << [I18n.t("updated_at"), l(m.attributes["updated_at"], format: :long)]
     end
 
-    s = "<table class=\"#{table_class}\">"
-    details.each do |d|
-      s += "<tr><td>#{d[0]}</td><td>#{d[1]}</td></tr>\n"
-    end
-    s += "</table>"
+    s = simple_show_helper_render_table(details, table_class)
 
     return s
+  end
+
+  def simple_show_helper_render_table(data, table_class)
+    s = "<table class=\"#{table_class}\">"
+    data.each do |dat|
+      s += "<tr>\n"
+      dat.each do |d|
+        s += "<td>#{d}</td>\n"
+      end
+      s += "</tr>\n"
+    end
+    s += "</table>"
   end
 end
